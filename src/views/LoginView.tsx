@@ -32,7 +32,7 @@ const LoginView: React.FC<Props> = ({ onLogin }) => {
   };
 
   return (
-    <div className="bg-gradient-to-b from-[#1a237e] to-[#0c0f2e] text-white min-h-screen flex flex-col font-sans">
+    <div className="bg-[#f0f2f5] text-black dark:bg-gradient-to-b dark:from-[#1a237e] dark:to-[#0c0f2e] dark:text-white min-h-screen flex flex-col font-sans">
       {/* Header */}
       <header className="w-full py-6 px-6 flex items-center justify-center">
         <h1 className="text-2xl font-bold tracking-wider">
@@ -49,7 +49,7 @@ const LoginView: React.FC<Props> = ({ onLogin }) => {
             </svg>
           </div>
 
-          <p className="text-gray-400 mb-10">
+          <p className="text-gray-600 dark:text-gray-400 mb-10">
             Accede a tu cuenta.
           </p>
 

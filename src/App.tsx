@@ -104,7 +104,7 @@ const App: React.FC = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-slate-100">
-      <header className="bg-gradient-to-r from-blue-800 to-indigo-900 text-white p-4 shadow-xl sticky top-0 z-50">
+      <header className="bg-[#f0f2f5] text-black dark:bg-gradient-to-r dark:from-blue-800 dark:to-indigo-900 dark:text-white p-4 shadow-xl sticky top-0 z-50">
         <div className="container mx-auto flex justify-between items-center">
           <div className="flex items-center gap-3">
             <a href="https://imgbb.com/"><img src="https://i.ibb.co/7t0LHGkr/logo-Devsoftinfo-removebg-preview.png" alt="logo Devsoftinfo removebg preview" style={{ height: '80px' }} /></a>
@@ -113,10 +113,10 @@ const App: React.FC = () => {
           {user && (
             <div className="flex items-center gap-4">
               <div className="hidden sm:flex flex-col items-end">
-                <span className="text-[10px] uppercase font-bold text-blue-200">Operador Activo</span>
+                <span className="text-[10px] uppercase font-bold text-slate-500 dark:text-blue-300">Operador Activo</span>
                 <span className="text-xs font-bold leading-none">{user.displayName}</span>
               </div>
-              <button onClick={handleLogout} className="bg-blue-700/50 hover:bg-red-500/80 px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all border border-white/10">Cerrar Sesión</button>
+              <button onClick={handleLogout} className="bg-red-500/80 hover:bg-red-600/80 dark:bg-blue-700/50 dark:hover:bg-red-500/80 px-4 py-2 rounded-xl text-white text-[10px] font-black uppercase tracking-widest transition-all border border-white/10">Cerrar Sesión</button>
             </div>
           )}
         </div>
