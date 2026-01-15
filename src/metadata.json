@@ -1,6 +1,6 @@
 {
-  "name": "FMC PEAIMCF - Sistema de Registro",
-  "description": "Plataforma especializada para el registro de fichas del proyecto PEAIMCF de la Fundación Misión Colombia (FMC), con integración de Firebase y autenticación de Google.",
+  "name": "DEVSOFTINFO - Develop Software Info.",
+  "description": "Plataforma especializada para potenciar Sitios WebAppd, con integración de Firebase y autenticación de Google.",
   "requestFramePermissions": [
     "camera"
   ]
