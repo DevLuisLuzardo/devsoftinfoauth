@@ -128,7 +128,7 @@ const App: React.FC = () => {
         </div>
       </main>
 
-      <footer className="fixed bottom-0 left-0 w-full bg-white dark:bg-slate-800 p-6 text-center border-t border-slate-100 dark:border-slate-700 z-10">
+      <footer className="fixed bottom-0 left-0 w-full bg-[#f0f2f5] dark:bg-slate-900 p-6 text-center border-t border-slate-100 dark:border-slate-700 z-10">
         <p className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 dark:text-slate-500">Develop Soft Info</p>
       </footer>
 
