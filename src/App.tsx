@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { UserProfile, Step, FichaData } from './types';
-import LoginView from './views/LoginView';
+import LoginView from './login/LoginView';
 import DashboardView from './views/DashboardView';
 import SecurityView from './views/SecurityView';
 import SearchView from './views/SearchView';
