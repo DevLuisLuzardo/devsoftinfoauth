@@ -6,6 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>FMC PEAIMCF - Registro de Fichas</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              'background-light': '#f8fafc', // slate-50
+              'background-dark': '#0f172a',  // slate-900
+              primary: '#fBBF24' // amber-400
+            }
+          }
+        }
+      }
+    </script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- Librería para generación de PDF directa -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
@@ -61,7 +75,7 @@
 }
 </script>
 </head>
-  <body class="bg-slate-50 text-slate-900">
+  <body class="bg-background-light text-slate-900 dark:bg-background-dark dark:text-slate-100">
     <div id="root"></div>
     <script type="module" src="/src/index.tsx"></script>
 </body>

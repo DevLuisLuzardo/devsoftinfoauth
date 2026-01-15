@@ -1,4 +1,4 @@
-// App.tsx
+
 import React, { useState, useEffect } from 'react';
 import { UserProfile, Step, FichaData } from './types';
 import LoginView from './views/LoginView';
@@ -12,6 +12,28 @@ const App: React.FC = () => {
   const [user, setUser] = useState<UserProfile | null>(null);
   const [currentStep, setCurrentStep] = useState<Step>(Step.LOGIN);
   const [selectedFicha, setSelectedFicha] = useState<FichaData | null>(null);
+
+  // Theme state and logic
+  const [theme, setTheme] = useState(() => {
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) return savedTheme;
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) return 'dark';
+    return 'light';
+  });
+
+  useEffect(() => {
+    const root = window.document.documentElement;
+    if (theme === 'dark') {
+      root.classList.add('dark');
+    } else {
+      root.classList.remove('dark');
+    }
+    localStorage.setItem('theme', theme);
+  }, [theme]);
+
+  const toggleDarkMode = () => {
+    setTheme(prevTheme => (prevTheme === 'light' ? 'dark' : 'light'));
+  };
 
   useEffect(() => {
     const savedUser = localStorage.getItem('fmc_user');
@@ -43,13 +65,13 @@ const App: React.FC = () => {
         return <SecurityView onBack={() => setCurrentStep(Step.DASHBOARD)} onSuccess={() => setCurrentStep(Step.SEARCH_ID)} />;
       case Step.SEARCH_ID:
         return (
-          <SearchView 
+          <SearchView
             user={user}
-            onBack={() => setCurrentStep(Step.SECURITY_CHECK)} 
+            onBack={() => setCurrentStep(Step.SECURITY_CHECK)}
             onFichaFound={(ficha) => {
               setSelectedFicha(ficha);
               setCurrentStep(Step.FORM_STEPPER);
-            }} 
+            }}
             onViewSummary={(ficha) => {
               setSelectedFicha(ficha);
               setCurrentStep(Step.VIEW_SUMMARY);
@@ -58,21 +80,21 @@ const App: React.FC = () => {
         );
       case Step.FORM_STEPPER:
         return selectedFicha ? (
-          <FormStepperView 
-            ficha={selectedFicha} 
-            onBack={() => setCurrentStep(Step.SEARCH_ID)} 
+          <FormStepperView
+            ficha={selectedFicha}
+            onBack={() => setCurrentStep(Step.SEARCH_ID)}
             onComplete={() => {
               setCurrentStep(Step.DASHBOARD);
               alert("Registro PEAIMCF finalizado exitosamente.");
-            }} 
+            }}
           />
         ) : null;
       case Step.VIEW_SUMMARY:
         return selectedFicha ? (
-          <ViewSummary 
-            ficha={selectedFicha} 
-            onBack={() => setCurrentStep(Step.SEARCH_ID)} 
-            onEdit={() => setCurrentStep(Step.FORM_STEPPER)} 
+          <ViewSummary
+            ficha={selectedFicha}
+            onBack={() => setCurrentStep(Step.SEARCH_ID)}
+            onEdit={() => setCurrentStep(Step.FORM_STEPPER)}
           />
         ) : null;
       default:
@@ -81,14 +103,12 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#f8fafc]">
+    <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-slate-100">
       <header className="bg-gradient-to-r from-blue-800 to-indigo-900 text-white p-4 shadow-xl sticky top-0 z-50">
         <div className="container mx-auto flex justify-between items-center">
           <div className="flex items-center gap-3">
-            <div className="bg-white p-1.5 rounded-xl shadow-inner">
-               <svg className="w-7 h-7 text-blue-800" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
-            </div>
-            <h1 className="text-lg font-black tracking-tight uppercase">FMC PEAIMCF</h1>
+            <a href="https://imgbb.com/"><img src="https://i.ibb.co/7t0LHGkr/logo-Devsoftinfo-removebg-preview.png" alt="logo Devsoftinfo removebg preview" style={{ height: '80px' }} /></a>
+            <h1 className="text-lg font-black tracking-tight uppercase">Develop Soft Info</h1>
           </div>
           {user && (
             <div className="flex items-center gap-4">
@@ -102,15 +122,24 @@ const App: React.FC = () => {
         </div>
       </header>
 
-      <main className="flex-grow container mx-auto p-4 md:p-8 flex justify-center items-start">
-        <div className="w-full max-w-4xl bg-white rounded-[2.5rem] shadow-[0_20px_50px_rgba(0,0,0,0.1)] overflow-hidden border border-slate-100">
+      <main className="flex-grow container mx-auto p-4 md:p-8 flex justify-center items-start pb-24">
+        <div className="w-full max-w-4xl bg-white dark:bg-slate-800 rounded-[2.5rem] shadow-[0_20px_50px_rgba(0,0,0,0.1)] overflow-hidden border border-slate-100 dark:border-slate-700">
           {renderCurrentStep()}
         </div>
       </main>
 
-      <footer className="bg-white p-6 text-center border-t border-slate-100">
-        <p className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400">Fundación Misión Colombia (FMC) - Proyecto PEAIMCF © 2024</p>
+      <footer className="fixed bottom-0 left-0 w-full bg-white dark:bg-slate-800 p-6 text-center border-t border-slate-100 dark:border-slate-700 z-10">
+        <p className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 dark:text-slate-500">Develop Soft Info</p>
       </footer>
+
+      <div className="fixed bottom-20 right-4 z-50">
+        <button
+          className="p-3 rounded-full bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-200 shadow-lg text-2xl"
+          onClick={toggleDarkMode}
+        >
+          {theme === 'dark' ? '🌙' : '🔆'}
+        </button>
+      </div>
     </div>
   );
 };
