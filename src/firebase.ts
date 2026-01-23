@@ -1,11 +1,10 @@
-
-import { initializeApp } from 'firebase/app';
+import { initializeApp, getApp, getApps } from 'firebase/app';
 import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
-import { 
+import {
   initializeFirestore,
-  doc, 
-  getDoc, 
-  setDoc, 
+  doc,
+  getDoc,
+  setDoc,
   serverTimestamp,
   collection,
   persistentLocalCache,
@@ -13,7 +12,9 @@ import {
 } from 'firebase/firestore';
 
 // Configuración del proyecto mcfpeaifmc
+
 export const firebaseConfig = {
+  /* SDK 1: devsoftinfoauth - Activo
   apiKey: "AIzaSyDZaXW2PinoFH3mqvyI3KSiJgpg1_aFcpA",
   authDomain: "devsoftinfoauth.firebaseapp.com",
   projectId: "devsoftinfoauth",
@@ -21,10 +22,21 @@ export const firebaseConfig = {
   messagingSenderId: "87600175677",
   appId: "1:87600175677:web:3b2c4dc159371fb75d6854",
   measurementId: "G-ZD25GVW98K"
+*/
+
+  /* SDK 2: mcfpeaifmc - Comentado */
+  apiKey: "AIzaSyACUOe0aisPsX4UE8kCKhlOEab0PmNOXFo",
+  authDomain: "mcfpeaifmc.firebaseapp.com",
+  databaseURL: "https://mcfpeaifmc-default-rtdb.firebaseio.com",
+  projectId: "mcfpeaifmc",
+  storageBucket: "mcfpeaifmc.firebasestorage.app",
+  messagingSenderId: "349371650104",
+  appId: "1:349371650104:web:ad260e17e9cfd31ac456cd",
+  measurementId: "G-LKC910C004"
 };
 
 // Inicialización de Firebase
-const app = initializeApp(firebaseConfig);
+const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 
@@ -59,7 +71,7 @@ export const mockFirestore = {
       if (docSnap.exists()) {
         const rawData = docSnap.data();
         const data = JSON.parse(JSON.stringify(rawData));
-        
+
         if (rawData.fecha_actualizacion?.toDate) {
           data.fecha_actualizacion = rawData.fecha_actualizacion.toDate().toISOString();
         }
@@ -101,7 +113,7 @@ export const mockFirestore = {
         ...logInfo,
         timestamp: serverTimestamp()
       });
-    } catch (e) {}
+    } catch (e) { }
   }
 };
 
